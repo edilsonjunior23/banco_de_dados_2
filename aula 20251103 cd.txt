@@ -1,6 +1,8 @@
 Aula banco de dados 2 
 
-- comand select
-
+- COMNDO SELECT
+SELEC
+FROM
+WHERE
 
 Edilson Nogueira

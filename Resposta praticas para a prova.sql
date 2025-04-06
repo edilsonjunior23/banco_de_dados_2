@@ -1,53 +1,53 @@
 
 -- Contar o número total de clientes
-select count(*) as total_clientes 						-- Função COUNT(*) conta todas as linhas da tabela clientes. todos clientes
-from clientes;											-- da tabela clientes
+select count(*) as total_clientes -- Função COUNT(*) conta todas as linhas da tabela clientes. todos clientes
+from clientes; -- da tabela clientes
 
 -- Contar o número total de pedidos
-select count(*) as total_pedidos 						-- Função COUNT(*) conta todas os pedidos registrados
-from  pedidos;											-- da tabela pedidos
+select count(*) as total_pedidos -- Função COUNT(*) conta todas os pedidos registrados
+from  pedidos; -- da tabela pedidos
 
 -- Calcular o valor total de todos os pedidos
-select sum(p.quantidade * pr.preco) as valor_pedidos    -- usa-se o SUM para calcular o valor de todos os pedidos (quandidade x preco)
-from pedidos as p 										-- usa o AS para crirar um apelido para a tabela
-	join produtos as pr 								-- usado para combinar registros de 2 tabelas com base em uma condição
-    on p.produto_id = pr.id; 							-- o On é usado junto com o Join, pra definir a condição da junção entre 2 tabelas.
+select sum(p.quantidade * pr.preco) as valor_pedidos-- usa-se o SUM para calcular o valor de todos os pedidos (quandidade x preco)
+from pedidos as p -- usa o AS para crirar um apelido para a tabela
+	join produtos as pr -- usado para combinar registros de 2 tabelas com base em uma condição
+    on p.produto_id = pr.id; -- o On é usado junto com o Join, pra definir a condição da junção entre 2 tabelas.
 
 -- calcular a média dos preços dos produtos
-select avg(preco) as p_medio 							-- usa o AVG para calcular média.
-from produtos;											-- da tabela produtos
+select avg(preco) as p_medio -- usa o AVG para calcular média.
+from produtos; -- da tabela produtos
 
 -- Listar todos os clientes e seus produtos
-select c.id, c.nome, p.id as pedido_id, p.data_pedido   -- (c) seginifica cliente
+select c.id, c.nome, p.id as pedido_id, p.data_pedido -- (c) seginifica cliente
 from clientes as c
-	left join pedidos as p 								-- todos os clientes inclusive o que não fizeram pedido, por isso usar left
-    on c.id = p.cliente_id; 							-- aqui quero o id do cliente referente o id do pedido do cliente
+	left join pedidos as p -- todos os clientes inclusive o que não fizeram pedido, por isso usar left
+    on c.id = p.cliente_id; -- aqui quero o id do cliente referente o id do pedido do cliente
     
 -- Listar todos os pedidos e seus produtos, incluindo pedidos sem produtos
-select p.id as pedido, pr.nome as produto 				-- (p.id) número do peido e (pr.nome) nome do pedido
-from pedidos as p 										-- tabelo pedido
-left join produtos as pr 								-- todos os pedidos e produtos, usar left
+select p.id as pedido, pr.nome as produto  -- (p.id) número do peido e (pr.nome) nome do pedido
+from pedidos as p  -- tabelo pedido
+left join produtos as pr  -- todos os pedidos e produtos, usar left
 on p.id = p.produto_id ;
 
 -- listar os produtos mais caros
-select *  												 -- tudo 
-from produtos 											 -- tabela produto
-order by preco desc; 									 -- (order by) ordena por onddem, (desc) ordem decressente.
+select *  -- tudo 
+from produtos  -- tabela produto
+order by preco desc;  -- (order by) ordena por onddem, (desc) ordem decressente.
 
 -- Listar os produtos com menos estoque
-select * 							 					 -- tudo
-from produtos 											 -- tabela produtos
-order by estoque asc;  									 -- (asc) do menor para o maior 
+select *  -- tudo
+from produtos -- tabela produtos
+order by estoque asc; -- (asc) do menor para o maior 
 
 -- Contar quantos pedidos foram feitos por clientes
-select cliente_id, count(*) as total_pedido 			 -- count(*) funçao para contar linhas de uma tabela
+select cliente_id, count(*) as total_pedido -- count(*) funçao para contar linhas de uma tabela
 from pedidos
-where cliente_id IS NOT NULL 							 -- pra verificar se o valor em uma coluna não está vazio
-group by cliente_id; 									 -- group by serve para agrupar linhas com valores semelhantes
+where cliente_id IS NOT NULL -- pra verificar se o valor em uma coluna não está vazio
+group by cliente_id; -- group by serve para agrupar linhas com valores semelhantes
 
 -- contar quantos produtos diferente foram vendidos
 select count(distinct produto_id) as produtos_vendidos 	 -- Distinct garante que o produto seja contado apenas 1 vez
-from pedidos											 -- da tabela pedidos
+from pedidos -- da tabela pedidos
 where produto_id;
 
 -- Mostrar os clientes que não realizaram um pedido

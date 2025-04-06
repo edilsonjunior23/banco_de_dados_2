@@ -1,0 +1,38 @@
+-- Matéria da prova
+-- comandos de agregação acount, sum, min, max e avg
+-- cross join
+-- join ( iner join)
+-- left join
+-- right join 
+
+select * from pedidos;
+
+
+-- Calcular o valor total de todos os pedidos
+select sum(quantidade * preco) as valor
+from pedidos as pe
+JOIN produtos as pr
+on pe.produto_id = pr.id;
+
+
+-- Listar todos os pedidos e seus produtos,
+-- Incluindo pedidos sem produtos
+
+select *
+from pedidos as pe
+	 left join produtos as pr
+    on pe.produto_id = pr.id;
+    
+    
+-- contar quantos produtos diferentes foram vendidos
+
+select *
+from produtos as pr
+	join pedidos as pe
+	on pr.id = pe.produto_id;
+
+
+
+
+
+

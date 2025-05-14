@@ -1,6 +1,4 @@
- -- Aula 03/05 CASE / THEN
- 
-  -- 1 Crie uma consulta SQL que exiba o nome do participante, 
+ -- 1 Crie uma consulta SQL que exiba o nome do participante, 
  -- o nome do evento e uma coluna chamada status_descricao que deve exibir:
 SELECT p.nome, e.nome_evento,
     CASE 
@@ -59,5 +57,9 @@ SELECT nome_evento, tipo_evento,
     END AS classificacao_tipo
 FROM eventos;
 
-
+-- Novo comando Having (Obrigatoriamento usado com "group by" para usar o HAVING, comando de agrupamento)
+SELECT id_evento, count(*) as qtd
+FROM inscricoes
+GROUP BY id_evento
+HAVING QTD > 1;
 		

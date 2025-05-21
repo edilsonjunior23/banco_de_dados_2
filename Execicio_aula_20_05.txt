@@ -1,0 +1,28 @@
+
+
+-- 01 Subconsulta para selecionar todos os clientes cujo email termina com @gmail -- 
+SELECT sub.nome, sub.email
+FROM (
+    SELECT * 
+    FROM clientes 
+    WHERE email LIKE '%@gmail.com'
+) AS sub;
+
+-- 02 Subconsulta que retorna os produtos com preço menor que R$100 -- 
+SELECT sub.nome, sub.preco
+FROM (
+    SELECT * 
+    FROM produtos 
+    WHERE preco < 100
+) AS sub
+ORDER BY sub.nome;
+
+
+ -- 03 Subconsulta para obte todos os pedidos feitos pela cliente Ana Souza -- 
+ SELECT p.id AS pedido_id, p.data_pedido
+FROM pedidos p
+WHERE p.cliente_id = (
+    SELECT id
+    FROM clientes
+    WHERE nome = 'Ana Souza'
+);
